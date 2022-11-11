@@ -1,1 +1,1 @@
-# eva_beadando_wpf
+Esemény vezéret alkalmazások második beadandója wpf-ben
