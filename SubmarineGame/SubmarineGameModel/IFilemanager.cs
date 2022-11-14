@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SubmarineGameModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,7 +9,7 @@ namespace SubmarineGameModel
 {
     public interface IFilemanager
     {
-        public void Save(string path);
-        public void Load();
+        public void Save(string path, MainModel model);
+        public void Load(string path, out List<MineModel> mines, out List<ShipModel> ships, out SubmarineModel player);
     }
 }

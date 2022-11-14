@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Beles\\OneDrive - Eotvos Lorand Tudomanyegyetem\\EVA\\bead\\wpf\\SubmarineGame\\SubmarineGamView\\SubmarineGameView.csproj": {}
+    "C:\\Users\\Beles\\OneDrive - Eotvos Lorand Tudomanyegyetem\\EVA\\bead\\wpf\\eva_beadando_wpf\\SubmarineGame\\SubmarineGamView\\SubmarineGameView.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Beles\\OneDrive - Eotvos Lorand Tudomanyegyetem\\EVA\\bead\\wpf\\SubmarineGame\\SubmarineGamView\\SubmarineGameView.csproj": {
+    "C:\\Users\\Beles\\OneDrive - Eotvos Lorand Tudomanyegyetem\\EVA\\bead\\wpf\\eva_beadando_wpf\\SubmarineGame\\SubmarineGamView\\SubmarineGameView.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Beles\\OneDrive - Eotvos Lorand Tudomanyegyetem\\EVA\\bead\\wpf\\SubmarineGame\\SubmarineGamView\\SubmarineGameView.csproj",
+        "projectUniqueName": "C:\\Users\\Beles\\OneDrive - Eotvos Lorand Tudomanyegyetem\\EVA\\bead\\wpf\\eva_beadando_wpf\\SubmarineGame\\SubmarineGamView\\SubmarineGameView.csproj",
         "projectName": "SubmarineGameView",
-        "projectPath": "C:\\Users\\Beles\\OneDrive - Eotvos Lorand Tudomanyegyetem\\EVA\\bead\\wpf\\SubmarineGame\\SubmarineGamView\\SubmarineGameView.csproj",
+        "projectPath": "C:\\Users\\Beles\\OneDrive - Eotvos Lorand Tudomanyegyetem\\EVA\\bead\\wpf\\eva_beadando_wpf\\SubmarineGame\\SubmarineGamView\\SubmarineGameView.csproj",
         "packagesPath": "C:\\Users\\Beles\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Beles\\OneDrive - Eotvos Lorand Tudomanyegyetem\\EVA\\bead\\wpf\\SubmarineGame\\SubmarineGamView\\obj\\",
+        "outputPath": "C:\\Users\\Beles\\OneDrive - Eotvos Lorand Tudomanyegyetem\\EVA\\bead\\wpf\\eva_beadando_wpf\\SubmarineGame\\SubmarineGamView\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

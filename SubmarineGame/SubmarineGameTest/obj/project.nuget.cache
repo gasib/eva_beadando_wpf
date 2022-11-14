@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "eXg3Ajhgp/uen5JmTETgJKMrnSHNZeVBT2dAIwZkaxm1OnnybOXMXSUK5tD74Lp4nWUGazPmuf6SrJFoi5g4cQ==",
+  "dgSpecHash": "RkGgCQJ+MDHC0U3WpB6KcJfOVKtOmOV9JwyCXZ7BcLFB5h/2RC1w36CpGjJyl5XE3XsZXqDT8tgqWsKOrmwoKA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Beles\\OneDrive - Eotvos Lorand Tudomanyegyetem\\EVA\\bead\\wpf\\SubmarineGame\\SubmarineGameTest\\SubmarineGameTest.csproj",
+  "projectFilePath": "C:\\Users\\Beles\\OneDrive - Eotvos Lorand Tudomanyegyetem\\EVA\\bead\\wpf\\eva_beadando_wpf\\SubmarineGame\\SubmarineGameTest\\SubmarineGameTest.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Beles\\.nuget\\packages\\coverlet.collector\\3.1.2\\coverlet.collector.3.1.2.nupkg.sha512",
     "C:\\Users\\Beles\\.nuget\\packages\\microsoft.codecoverage\\17.1.0\\microsoft.codecoverage.17.1.0.nupkg.sha512",
