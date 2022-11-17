@@ -1,0 +1,36 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v6.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v6.0": {
+      "SubmarineGameViewModel/1.0.0": {
+        "dependencies": {
+          "SubmarineGameModel": "1.0.0"
+        },
+        "runtime": {
+          "SubmarineGameViewModel.dll": {}
+        }
+      },
+      "SubmarineGameModel/1.0.0": {
+        "runtime": {
+          "SubmarineGameModel.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "SubmarineGameViewModel/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "SubmarineGameModel/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

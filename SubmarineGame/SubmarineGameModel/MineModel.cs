@@ -23,6 +23,7 @@ namespace SubmarineGameModel
             MineType = mineType;
             _moveTimer = new System.Timers.Timer(_tickTime);
             _moveTimer.Elapsed += Move;
+            _moveTimer.Start();
         }
 
         public MineModel()
@@ -34,10 +35,6 @@ namespace SubmarineGameModel
         private void Move(object? sender, EventArgs e)
         {
             Location = new Point(Location.X, Location.Y + Speed);
-            if (Location.Y > MaxBoundaries.Y - Size.Height)
-            {
-                Location = new Point(Location.X, MaxBoundaries.Y - Size.Height);
-            }
             if (Location.Y >= MaxBoundaries.Y + Size.Height)
             {
                 OutOfVisibleArea?.Invoke(this, EventArgs.Empty);

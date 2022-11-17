@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NET;NET6_0;NETCOREAPP
 C:\Users\Beles\OneDrive - Eotvos Lorand Tudomanyegyetem\EVA\bead\wpf\eva_beadando_wpf\SubmarineGame\SubmarineGamView\App.xaml
-11407045341
+4-1287121022
 
-51406618399
-194618410957
-MainWindow.xaml;
+8470127122
+1961038744875
+GameWindow.xaml;Mine.xaml;Ship.xaml;Submarine.xaml;
 
-False
+True
 

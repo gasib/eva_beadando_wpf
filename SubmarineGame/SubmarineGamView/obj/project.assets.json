@@ -1,11 +1,48 @@
 {
   "version": 3,
   "targets": {
-    "net6.0-windows7.0": {}
+    "net6.0-windows7.0": {
+      "SubmarineGameModel/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "compile": {
+          "bin/placeholder/SubmarineGameModel.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/SubmarineGameModel.dll": {}
+        }
+      },
+      "SubmarineGameViewModel/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "dependencies": {
+          "SubmarineGameModel": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/SubmarineGameViewModel.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/SubmarineGameViewModel.dll": {}
+        }
+      }
+    }
   },
-  "libraries": {},
+  "libraries": {
+    "SubmarineGameModel/1.0.0": {
+      "type": "project",
+      "path": "../SubmarineGameModel/SubmarineGameModel.csproj",
+      "msbuildProject": "../SubmarineGameModel/SubmarineGameModel.csproj"
+    },
+    "SubmarineGameViewModel/1.0.0": {
+      "type": "project",
+      "path": "../SubmarineGameViewModel/SubmarineGameViewModel.csproj",
+      "msbuildProject": "../SubmarineGameViewModel/SubmarineGameViewModel.csproj"
+    }
+  },
   "projectFileDependencyGroups": {
-    "net6.0-windows7.0": []
+    "net6.0-windows7.0": [
+      "SubmarineGameViewModel >= 1.0.0"
+    ]
   },
   "packageFolders": {
     "C:\\Users\\Beles\\.nuget\\packages\\": {},
@@ -38,7 +75,11 @@
       "frameworks": {
         "net6.0-windows7.0": {
           "targetAlias": "net6.0-windows",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Users\\Beles\\OneDrive - Eotvos Lorand Tudomanyegyetem\\EVA\\bead\\wpf\\eva_beadando_wpf\\SubmarineGame\\SubmarineGameViewModel\\SubmarineGameViewModel.csproj": {
+              "projectPath": "C:\\Users\\Beles\\OneDrive - Eotvos Lorand Tudomanyegyetem\\EVA\\bead\\wpf\\eva_beadando_wpf\\SubmarineGame\\SubmarineGameViewModel\\SubmarineGameViewModel.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

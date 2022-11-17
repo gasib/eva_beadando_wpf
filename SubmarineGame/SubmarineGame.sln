@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SubmarineGameModel", "Subma
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SubmarineGameTest", "SubmarineGameTest\SubmarineGameTest.csproj", "{2A0E6B15-71EB-4765-9F58-E6989EC99BFF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Persistence", "Persistence\Persistence.csproj", "{92DEA82E-0EB7-47A6-B750-B714EEF6578B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Persistence", "Persistence\Persistence.csproj", "{92DEA82E-0EB7-47A6-B750-B714EEF6578B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SubmarineGameViewModel", "SubmarineGameViewModel\SubmarineGameViewModel.csproj", "{0FE21967-174A-4B50-9768-D29842B6ED99}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{92DEA82E-0EB7-47A6-B750-B714EEF6578B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{92DEA82E-0EB7-47A6-B750-B714EEF6578B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{92DEA82E-0EB7-47A6-B750-B714EEF6578B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0FE21967-174A-4B50-9768-D29842B6ED99}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0FE21967-174A-4B50-9768-D29842B6ED99}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0FE21967-174A-4B50-9768-D29842B6ED99}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0FE21967-174A-4B50-9768-D29842B6ED99}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

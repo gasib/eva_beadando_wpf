@@ -27,11 +27,14 @@ namespace SubmarineGameModel
             _elapsedTimer.Elapsed += OnElapsedTimerTick;
         }
 
-        public void InitObjects(object? sender, SizeArgs e)
+        public void InitObjects(Size size)
         {
-            _currentSize = e.Size;
-            InitPlayerData(e.Size);
-            InitShipsData(e.Size);
+            _currentSize = size;
+            InitPlayerData(size);
+            for (int i = 0; i < SHIP_COUNT; ++i)
+            {
+                InitShipsData(size);
+            }
             ObjectsInitialized?.Invoke(this, EventArgs.Empty);
             TimeElapsed = 0;
             _elapsedTimer.Start();
@@ -53,9 +56,11 @@ namespace SubmarineGameModel
             ship.Size = new Size(size.Width / 8, size.Width / 24);
             int nextRand = random.Next() % (size.Width + ship.Size.Width);
             ship.Location = new Point(nextRand, size.Height / 6);
-            ship.MinBoundaries = new Point(size.Width - (ship.Size.Width / 2), 0);
+            ship.MinBoundaries = new Point(0 - (ship.Size.Width / 2), 0);
             ship.MaxBoundaries = new Point(size.Width + (ship.Size.Width / 2), size.Height);
-            ship.Speed = 15;
+            ship.Speed = random.Next() % 3 + 1;
+            ship.AverageDropTime = 2000;
+            ship.DropMine += OnDropMine;
             Ships.Add(ship);
         }
 
@@ -113,12 +118,13 @@ namespace SubmarineGameModel
         private void OnElapsedTimerTick(object? sender, EventArgs e)
         {
             TimeElapsed++;
+            TimerUpdated?.Invoke(this, TimeElapsed.ToString());
         }
 
         public void RestartRequest(object? sender, EventArgs e)
         {
             DeleteObjects();
-            InitObjects(this, new SizeArgs(_currentSize));
+            InitObjects(_currentSize);
         }
 
         private void DeleteObjects()
@@ -134,6 +140,40 @@ namespace SubmarineGameModel
                 Mines.Remove(mine);
             }
             ObjectsRemoved?.Invoke(this, EventArgs.Empty);
+        }
+
+        private void OnDropMine(object? sender, DropMineEventArgs e)
+        {
+
+            var mine = InitMine();
+            switch (e.MineType)
+            {
+                case MineType.Small:
+                    mine.Size = new Size(_currentSize.Width / 50, _currentSize.Width / 50);
+                    mine.Speed = 1;
+                    break;
+                case MineType.Medium:
+                    mine.Size = new Size(_currentSize.Width / 45, _currentSize.Width / 45);
+                    mine.Speed = 2;
+                    break;
+                case MineType.Heavy:
+                    mine.Size = new Size(_currentSize.Width / 40, _currentSize.Width / 40);
+                    mine.Speed = 3;
+                    break;
+            }
+            mine.Location = e.Location;
+            mine.Updated += OnMineModelUpdate;
+            mine.OutOfVisibleArea += OnMineOutOfVisibleArea;
+            Mines.Add(mine);
+            MineCreated?.Invoke(this, mine);
+        }
+
+        private MineModel InitMine()
+        {
+            var mine = new MineModel();
+            mine.MinBoundaries = new Point(0 - mine.Size.Width, 0);
+            mine.MaxBoundaries = new Point(_currentSize.Width + mine.Size.Width, _currentSize.Height);
+            return mine;
         }
 
         private void OnMineModelUpdate(object? sender, EventArgs e)
@@ -166,6 +206,7 @@ namespace SubmarineGameModel
             List<ShipModel> ships = new List<ShipModel>();
             List<MineModel> mines = new List<MineModel>();
             manager.Load(path, out mines, out ships, out player);
+            // TODO event management
             Player = player;
             DeleteObjects();
             Ships = ships;
@@ -177,5 +218,7 @@ namespace SubmarineGameModel
         public event EventHandler? ObjectsRemoved;
         public event EventHandler? ObjectsInitialized;
         public event EventHandler<MineModel>? MineDestroyed;
+        public event EventHandler<MineModel>? MineCreated;
+        public event EventHandler<string>? TimerUpdated;
     }
 }

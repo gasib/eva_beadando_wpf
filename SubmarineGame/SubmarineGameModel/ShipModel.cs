@@ -35,6 +35,8 @@ namespace SubmarineGameModel
             _moveTimer.Elapsed += Move;
             _dropTimer = new System.Timers.Timer(_tickTime);
             _dropTimer.Elapsed += OnDropTimerTick;
+            _moveTimer.Start();
+            _dropTimer.Start();
         }
 
         public ShipModel()
@@ -75,10 +77,10 @@ namespace SubmarineGameModel
                     if (Location.X > MaxBoundaries.X - Size.Width)
                     {
                         Location = new Point(MaxBoundaries.X - Size.Width, Location.Y);
-                    }
-                    if (Location.X == MaxBoundaries.X - Size.Width)
-                    {
-                        Direction = Direction.Left;
+                        if (Location.X == MaxBoundaries.X - Size.Width)
+                        {
+                            Direction = Direction.Left;
+                        }
                     }
                     break;
                 case Direction.Left:
@@ -86,10 +88,10 @@ namespace SubmarineGameModel
                     if (Location.X < MinBoundaries.X)
                     {
                         Location = new Point(MinBoundaries.X, Location.Y);
-                    }
-                    if (Location.X == MinBoundaries.X)
-                    {
-                        Direction = Direction.Right;
+                        if (Location.X == MinBoundaries.X)
+                        {
+                            Direction = Direction.Right;
+                        }
                     }
                     break;
             }
@@ -120,7 +122,7 @@ namespace SubmarineGameModel
 
         private void OnDropTimerTick(object? sender, EventArgs e)
         {
-            var mineLocation = new Point(Location.X + (Size.Width / 2), Size.Height);
+            var mineLocation = new Point(Location.X + (Size.Width / 2), Location.Y + Size.Height);
             DropMine?.Invoke(this, new DropMineEventArgs(MineType, mineLocation));
             _dropTimer.Interval = RandomDropTime(MineType, AverageDropTime);
         }
