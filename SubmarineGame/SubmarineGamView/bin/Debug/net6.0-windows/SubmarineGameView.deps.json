@@ -14,6 +14,14 @@
           "SubmarineGameView.dll": {}
         }
       },
+      "Persistence/1.0.0": {
+        "dependencies": {
+          "SubmarineGameModel": "1.0.0"
+        },
+        "runtime": {
+          "Persistence.dll": {}
+        }
+      },
       "SubmarineGameModel/1.0.0": {
         "runtime": {
           "SubmarineGameModel.dll": {}
@@ -21,6 +29,7 @@
       },
       "SubmarineGameViewModel/1.0.0": {
         "dependencies": {
+          "Persistence": "1.0.0",
           "SubmarineGameModel": "1.0.0"
         },
         "runtime": {
@@ -31,6 +40,11 @@
   },
   "libraries": {
     "SubmarineGameView/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Persistence/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

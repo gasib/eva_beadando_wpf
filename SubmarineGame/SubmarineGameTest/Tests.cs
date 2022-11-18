@@ -1,11 +1,13 @@
 using SubmarineGameModel;
 using System.Drawing;
+using Moq;
 
 namespace SubmarineGameTest
 {
     [TestClass]
     public class SubmarineModelTests
     {
+
         [TestMethod]
         public void TestCtorWithoutArgs()
         {
@@ -124,6 +126,58 @@ namespace SubmarineGameTest
             Assert.AreNotEqual(initAverageDropTime, model.AverageDropTime);
             model.BoostShip();
             Assert.AreEqual(secondAvgDropTime, model.AverageDropTime);
+        }
+    }
+
+    [TestClass]
+    public class TestMainModel
+    {
+        private Mock<IFilemanager> _mock = null;
+        [TestMethod]
+        public void TestCtor()
+        {
+            var model = new MainModel();
+            Assert.IsTrue(model.Player != null);
+            Assert.IsTrue(model.Ships != null);
+            Assert.IsTrue(model.Mines != null);
+        }
+
+        [TestMethod]
+        public void TestInit()
+        {
+            Size s = new Size(10,10);
+            var model = new MainModel();
+            model.InitObjects(s);
+            Assert.IsTrue(model.Player != null);
+            Assert.IsTrue(model.Ships.Count != 0);
+            Assert.IsTrue(model.Paused == false);
+        }
+
+        [TestMethod]
+        public void TestDeleteObjects()
+        {
+            var model = new MainModel();
+            model.InitObjects(new Size(10,10));
+            model.DeleteObjects();
+            Assert.IsTrue(model.Ships.Count == 0);
+            Assert.IsTrue(model.Mines.Count == 0);
+        }
+
+        [TestMethod]
+        public void TestLoad()
+        {
+            var model = new MainModel();
+            _mock = new Mock<IFilemanager>();
+            SubmarineModel t1 = new SubmarineModel();
+            List<ShipModel> t2 = new List<ShipModel>();
+            List<MineModel> t3 = new List<MineModel>();
+            var mm = It.IsAny<List<MineModel>>();
+            var sm = It.IsAny<List<ShipModel>>();
+            var pm = It.IsAny<SubmarineModel>();
+            _mock.Setup(p => p.Load(It.IsAny<string>(), out mm, out sm, out pm));
+
+            model.Load(String.Empty, _mock.Object);
+            _mock.Verify(p => p.Load(String.Empty, out t3, out t2, out t1));
         }
     }
 }

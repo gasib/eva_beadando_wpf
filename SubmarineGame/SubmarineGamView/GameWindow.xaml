@@ -6,16 +6,36 @@
         xmlns:local="clr-namespace:SubmarineGameView"
         mc:Ignorable="d"
         Title="Submarine Game" Height="768" Width="1024" ResizeMode="NoResize">
+    <Window.InputBindings>
+        <KeyBinding Key="Space" Command="{Binding PauseCommand}"/>
+        <KeyBinding Key="W" Command="{Binding MoveCommand}" CommandParameter="Up"/>
+        <KeyBinding Key="S" Command="{Binding MoveCommand}" CommandParameter="Down"/>
+        <KeyBinding Key="A" Command="{Binding MoveCommand}" CommandParameter="Left"/>
+        <KeyBinding Key="D" Command="{Binding MoveCommand}" CommandParameter="Right"/>
+    </Window.InputBindings>
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <Canvas Grid.Row="0">
+        <Menu Grid.Row="0">
+            <Button Command="{Binding NewGameCommand}" >
+                <TextBlock Text="New Game"></TextBlock>
+            </Button>
+            <Button Command="{Binding LoadGameCommand}" IsEnabled="{Binding Paused}">
+                <TextBlock Text="Load Game"></TextBlock>
+            </Button>
+            <Button Command="{Binding SaveGameCommand}" IsEnabled="{Binding Paused}">
+                <TextBlock Text="Save Game"></TextBlock>
+            </Button>
+        </Menu>
+        
+        <Canvas Grid.Row="1">
             
         </Canvas>
-        <StatusBar Grid.Row="1">
+        <StatusBar Grid.Row="2">
             <TextBlock TextWrapping="Wrap" Text="{Binding TimeElapsed}"/>
 
         </StatusBar>

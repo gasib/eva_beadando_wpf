@@ -1,4 +1,5 @@
-﻿using SubmarineGameView;
+﻿using Microsoft.Win32;
+using SubmarineGameView;
 using SubmarineGameViewModel;
 using System;
 using System.Collections.Generic;
@@ -10,6 +11,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
+using System.Windows.Input;
 
 namespace SubmarineGamView
 {
@@ -44,8 +46,48 @@ namespace SubmarineGamView
             _mainModel.PlayerRequest += OnPlayerRequest;
             _mainModel.MineRequest += OnMineRequest;
             _mainModel.MineViewModelDestroyed += OnMineVMDestroyed;
+            _mainModel.RestartRequest += OnRestartRequested;
+            _mainModel.FileErrorOccured += OnFileErrorOccured;
+            _mainModel.LoadRequest += OnLoadRequest;
+            _mainModel.DeleteViewRequest += OnDestroyRequest;
+            _mainModel.SaveRequest += OnSaveRequest;
+            _mainModel.PlayerDestroyed += OnPlayerDestroyed;
 
-            _mainModel.Init();
+            _mainModel.Init(new System.Drawing.Size((int)_canvas.ActualWidth, (int)_canvas.ActualHeight));
+        }
+
+        private void OnPlayerDestroyed(object? sender, string e)
+        {
+            Dispatcher.BeginInvoke(() =>
+            {
+                MessageBox.Show("Your submarine is destroyed. You survived for " + e + " seconds.", "Game Over", MessageBoxButton.OK);
+                OnRestartRequested(this, EventArgs.Empty);
+            });
+        }
+
+        private void OnSaveRequest(object? sender, EventArgs e)
+        {
+            var ofd = new OpenFileDialog();
+            ofd.Filter = "Save files | *.txt";
+            if (ofd.ShowDialog() == true)
+            {
+                _mainModel.Save(ofd.FileName);
+            }
+        }
+
+        private void OnFileErrorOccured(object? sender, string e)
+        {
+            MessageBox.Show(e, "Error", MessageBoxButton.OK);
+        }
+
+        private void OnLoadRequest(object? sender, EventArgs e)
+        {
+            var ofd = new OpenFileDialog();
+            ofd.Filter = "Load files | *.txt";
+            if (ofd.ShowDialog() == true)
+            {
+                _mainModel.Load(ofd.FileName);
+            }
         }
 
         public App()
@@ -104,6 +146,30 @@ namespace SubmarineGamView
                 _canvas.Children.Add(mine);
                 _mines.Add(mine);
             });
+        }
+        public void DestroyViews()
+        {
+            _canvas.Children.Remove(_player);
+            foreach (var ship in _ships)
+            {
+                _canvas.Children.Remove(ship);
+            }
+            foreach (var mine in _mines)
+            {
+                _canvas.Children.Remove(mine);
+            }
+        }
+
+        public void OnDestroyRequest(object? sender, EventArgs e)
+        {
+            DestroyViews();
+            _mainModel.OnViewObjectsDeleted(this, EventArgs.Empty);
+        }
+
+        public void OnRestartRequested(object? sender, EventArgs e)
+        {
+            DestroyViews();
+            _mainModel.OnRestart();
         }
 
         public void OnMineVMDestroyed(object? sender, SubmarineGameViewModel.MineVM model)

@@ -33,7 +33,7 @@ namespace SubmarineGameModel
             AverageDropTime = averageDropTime;
             _moveTimer = new System.Timers.Timer(_tickTime);
             _moveTimer.Elapsed += Move;
-            _dropTimer = new System.Timers.Timer(_tickTime);
+            _dropTimer = new System.Timers.Timer(RandomDropTime(MineType, AverageDropTime));
             _dropTimer.Elapsed += OnDropTimerTick;
             _moveTimer.Start();
             _dropTimer.Start();

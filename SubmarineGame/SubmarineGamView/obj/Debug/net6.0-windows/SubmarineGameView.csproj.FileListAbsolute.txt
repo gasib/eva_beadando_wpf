@@ -57,3 +57,8 @@ C:\Users\Beles\OneDrive - Eotvos Lorand Tudomanyegyetem\EVA\bead\wpf\eva_beadand
 C:\Users\Beles\OneDrive - Eotvos Lorand Tudomanyegyetem\EVA\bead\wpf\eva_beadando_wpf\SubmarineGame\SubmarineGamView\obj\Debug\net6.0-windows\GameWindow.baml
 C:\Users\Beles\OneDrive - Eotvos Lorand Tudomanyegyetem\EVA\bead\wpf\eva_beadando_wpf\SubmarineGame\SubmarineGamView\obj\Debug\net6.0-windows\Mine.g.cs
 C:\Users\Beles\OneDrive - Eotvos Lorand Tudomanyegyetem\EVA\bead\wpf\eva_beadando_wpf\SubmarineGame\SubmarineGamView\obj\Debug\net6.0-windows\Mine.baml
+C:\Users\Beles\OneDrive - Eotvos Lorand Tudomanyegyetem\EVA\bead\wpf\eva_beadando_wpf\SubmarineGame\SubmarineGamView\bin\Debug\net6.0-windows\Persistence.deps.json
+C:\Users\Beles\OneDrive - Eotvos Lorand Tudomanyegyetem\EVA\bead\wpf\eva_beadando_wpf\SubmarineGame\SubmarineGamView\bin\Debug\net6.0-windows\Persistence.runtimeconfig.json
+C:\Users\Beles\OneDrive - Eotvos Lorand Tudomanyegyetem\EVA\bead\wpf\eva_beadando_wpf\SubmarineGame\SubmarineGamView\bin\Debug\net6.0-windows\Persistence.exe
+C:\Users\Beles\OneDrive - Eotvos Lorand Tudomanyegyetem\EVA\bead\wpf\eva_beadando_wpf\SubmarineGame\SubmarineGamView\bin\Debug\net6.0-windows\Persistence.dll
+C:\Users\Beles\OneDrive - Eotvos Lorand Tudomanyegyetem\EVA\bead\wpf\eva_beadando_wpf\SubmarineGame\SubmarineGamView\bin\Debug\net6.0-windows\Persistence.pdb

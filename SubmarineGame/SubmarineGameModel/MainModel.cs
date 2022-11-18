@@ -16,6 +16,15 @@ namespace SubmarineGameModel
         public int TimeElapsed { get; private set; }
         private System.Timers.Timer _elapsedTimer;
         private Size _currentSize;
+        private bool _paused;
+        public bool Paused { 
+            get { return _paused; }
+            set
+            {
+                _paused = value;
+                GamePaused?.Invoke(this, _paused);
+            }
+        }
 
         public MainModel()
         {
@@ -29,6 +38,7 @@ namespace SubmarineGameModel
 
         public void InitObjects(Size size)
         {
+            Paused = false;
             _currentSize = size;
             InitPlayerData(size);
             for (int i = 0; i < SHIP_COUNT; ++i)
@@ -43,8 +53,8 @@ namespace SubmarineGameModel
         private void InitPlayerData(Size size)
         {
             Player.Size = new Size(size.Width / 10, size.Width / 50);
-            Player.Location = new Point((size.Width / 2) - (Player.Size.Width / 2));
-            Player.MinBoundaries = new Point(0, 0);
+            Player.Location = new Point((size.Width / 2) - (Player.Size.Width / 2), size.Height / 2 + size.Height / 8);
+            Player.MinBoundaries = new Point(0, size.Height / 6 + size.Width / 24);
             Player.MaxBoundaries = new Point(size.Width, size.Height);
             Player.Speed = (int)(size.Width / 50);
         }
@@ -91,27 +101,35 @@ namespace SubmarineGameModel
 
         private void Stop()
         {
-            _elapsedTimer.Stop();
-            foreach (var ship in Ships)
+            if (Ships != null && Mines != null)
             {
-                ship.Stop();
-            }
-            foreach (var mine in Mines)
-            {
-                mine.Stop();
+                Paused = true;
+                _elapsedTimer.Stop();
+                foreach (var ship in Ships)
+                {
+                    ship.Stop();
+                }
+                foreach (var mine in Mines)
+                {
+                    mine.Stop();
+                }
             }
         }
 
         private void Start()
         {
-            _elapsedTimer.Start();
-            foreach (var ship in Ships)
+            if (Ships != null && Mines != null)
             {
-                ship.Start();
-            }
-            foreach (var mine in Mines)
-            {
-                mine.Start();
+                Paused = false;
+                _elapsedTimer.Start();
+                foreach (var ship in Ships)
+                {
+                    ship.Start();
+                }
+                foreach (var mine in Mines)
+                {
+                    mine.Start();
+                }
             }
         }
 
@@ -119,6 +137,13 @@ namespace SubmarineGameModel
         {
             TimeElapsed++;
             TimerUpdated?.Invoke(this, TimeElapsed.ToString());
+            if (TimeElapsed != 0 && TimeElapsed % 30 == 0)
+            {
+                foreach (var ship in Ships)
+                {
+                    ship.BoostShip();
+                }
+            }
         }
 
         public void RestartRequest(object? sender, EventArgs e)
@@ -127,11 +152,13 @@ namespace SubmarineGameModel
             InitObjects(_currentSize);
         }
 
-        private void DeleteObjects()
+        public void DeleteObjects()
         {
+            Paused = true;
             while (Ships.Count != 0)
             {
                 var ship = Ships.First();
+                ship.DropMine -= OnDropMine;
                 Ships.Remove(ship);
             }
             while (Mines.Count != 0)
@@ -190,8 +217,11 @@ namespace SubmarineGameModel
             var mine = sender as MineModel;
             if (mine != null)
             {
-                Mines.Remove(mine);
-                MineDestroyed?.Invoke(this, mine);
+                if (Mines.Contains(mine))
+                {
+                    Mines.Remove(mine);
+                    MineDestroyed?.Invoke(this, mine);
+                }
             }
         }
 
@@ -202,15 +232,22 @@ namespace SubmarineGameModel
 
         public void Load(string path, IFilemanager manager)
         {
+            DeleteObjects();
             SubmarineModel player = new SubmarineModel();
             List<ShipModel> ships = new List<ShipModel>();
             List<MineModel> mines = new List<MineModel>();
             manager.Load(path, out mines, out ships, out player);
-            // TODO event management
             Player = player;
-            DeleteObjects();
             Ships = ships;
+            if (Ships != null)
+            {
+                foreach (var ship in Ships)
+                {
+                    ship.DropMine += OnDropMine;
+                }
+            } 
             Mines = mines;
+            Stop();
             ObjectsInitialized?.Invoke(this, EventArgs.Empty);
         }
 
@@ -220,5 +257,6 @@ namespace SubmarineGameModel
         public event EventHandler<MineModel>? MineDestroyed;
         public event EventHandler<MineModel>? MineCreated;
         public event EventHandler<string>? TimerUpdated;
+        public event EventHandler<bool>? GamePaused;
     }
 }

@@ -2,6 +2,19 @@
   "version": 3,
   "targets": {
     "net6.0": {
+      "Persistence/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "dependencies": {
+          "SubmarineGameModel": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/Persistence.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Persistence.dll": {}
+        }
+      },
       "SubmarineGameModel/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v6.0",
@@ -15,6 +28,11 @@
     }
   },
   "libraries": {
+    "Persistence/1.0.0": {
+      "type": "project",
+      "path": "../Persistence/Persistence.csproj",
+      "msbuildProject": "../Persistence/Persistence.csproj"
+    },
     "SubmarineGameModel/1.0.0": {
       "type": "project",
       "path": "../SubmarineGameModel/SubmarineGameModel.csproj",
@@ -23,6 +41,7 @@
   },
   "projectFileDependencyGroups": {
     "net6.0": [
+      "Persistence >= 1.0.0",
       "SubmarineGameModel >= 1.0.0"
     ]
   },
@@ -58,6 +77,9 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
+            "C:\\Users\\Beles\\OneDrive - Eotvos Lorand Tudomanyegyetem\\EVA\\bead\\wpf\\eva_beadando_wpf\\SubmarineGame\\Persistence\\Persistence.csproj": {
+              "projectPath": "C:\\Users\\Beles\\OneDrive - Eotvos Lorand Tudomanyegyetem\\EVA\\bead\\wpf\\eva_beadando_wpf\\SubmarineGame\\Persistence\\Persistence.csproj"
+            },
             "C:\\Users\\Beles\\OneDrive - Eotvos Lorand Tudomanyegyetem\\EVA\\bead\\wpf\\eva_beadando_wpf\\SubmarineGame\\SubmarineGameModel\\SubmarineGameModel.csproj": {
               "projectPath": "C:\\Users\\Beles\\OneDrive - Eotvos Lorand Tudomanyegyetem\\EVA\\bead\\wpf\\eva_beadando_wpf\\SubmarineGame\\SubmarineGameModel\\SubmarineGameModel.csproj"
             }

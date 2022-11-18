@@ -15,6 +15,16 @@ namespace SubmarineGameViewModel
         private List<ShipVM> _ships;
         private List<MineVM> _mines;
         private string _timeElapsedInSeconds;
+        private bool _modelPaused;
+        public bool Paused
+        {
+            get { return _modelPaused; }
+            set
+            {
+                _modelPaused = value;
+                OnPropertyChanged();
+            }
+        }
         public String TimeElapsed 
         {
             get
@@ -34,6 +44,8 @@ namespace SubmarineGameViewModel
             NewGameCommand = new DelegateCommand(param => OnNewGame());
             LoadGameCommand = new DelegateCommand(param => OnLoadGame());
             SaveGameCommand = new DelegateCommand(param => OnSaveGame());
+            MoveCommand = new DelegateCommand(param => OnMove(param), (param) => { return !Paused; });
+            PauseCommand = new DelegateCommand(param => OnPause());
 
             _model.ObjectsInitialized += OnModelObjectsInitialized;
             _model.ObjectsRemoved += OnModelObjectsRemoved;
@@ -41,6 +53,48 @@ namespace SubmarineGameViewModel
             _model.MineDestroyed += OnModelMineDestroyed;
             _model.MineCreated += OnMineDropped;
             _model.TimerUpdated += OnModelTimerUpdated;
+            _model.GamePaused += OnModelGamePaused;
+        }
+
+        private void OnPause()
+        {
+            switch (Paused)
+            {
+                case false:
+                    _model.StopObjects(this, EventArgs.Empty);
+                    break;
+                case true:
+                    _model.StartObjects(this, EventArgs.Empty);
+                    break;
+            }
+        }
+
+        private void OnMove(object? param)
+        {
+            string? s = param?.ToString();
+            if (s != null)
+            {
+                switch ((Direction)Enum.Parse(typeof(Direction), s))
+                {
+                    case Direction.Up:
+                        _model.Player.Move(Direction.Up);
+                        break;
+                    case Direction.Down:
+                        _model.Player.Move(Direction.Down);
+                        break;
+                    case Direction.Left:
+                        _model.Player.Move(Direction.Left);
+                        break;
+                    case Direction.Right:
+                        _model.Player.Move(Direction.Right);
+                        break;
+                }
+            }
+        }
+
+        private void OnModelGamePaused(object? sender, bool e)
+        {
+            Paused = e;
         }
 
         private void OnModelTimerUpdated(object? sender, string e)
@@ -48,9 +102,9 @@ namespace SubmarineGameViewModel
             TimeElapsed = e;
         }
 
-        public void Init()
+        public void Init(Size size)
         {
-            _model.InitObjects(new Size(1024,768));
+            _model.InitObjects(size);
         }
 
         public event EventHandler<SubmarineGameViewModel.ShipVM>? ShipRequest;
@@ -66,14 +120,17 @@ namespace SubmarineGameViewModel
             }
         }
         public event EventHandler<MineVM>? MineViewModelDestroyed;
+        public event EventHandler<string>? PlayerDestroyed;
         private void OnModelPlayerDestroyed(object? sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            PlayerDestroyed?.Invoke(this, TimeElapsed);
         }
 
         private void OnModelObjectsRemoved(object? sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            _player = null;
+            _ships.Clear();
+            _mines.Clear();
         }
 
         private void OnModelObjectsInitialized(object? sender, EventArgs e)
@@ -106,26 +163,73 @@ namespace SubmarineGameViewModel
         public DelegateCommand NewGameCommand { get; private set; }
         public DelegateCommand LoadGameCommand { get; private set; }
         public DelegateCommand SaveGameCommand { get; private set; }
+        public DelegateCommand MoveCommand { get; private set; }
+        public DelegateCommand PauseCommand { get; private set; }
 
-        public event EventHandler? NewGame;
-        public event EventHandler? LoadGame;
-        public event EventHandler? SaveGame;
+        public event EventHandler? RestartRequest;
+        public event EventHandler? LoadRequest;
+        public event EventHandler? SaveRequest;
+        public event EventHandler? DeleteViewRequest;
 
         private void OnSaveGame()
         {
-            throw new NotImplementedException();
+            SaveRequest?.Invoke(this, EventArgs.Empty);
         }
 
         private void OnLoadGame()
         {
-            throw new NotImplementedException();
+            LoadRequest?.Invoke(this, EventArgs.Empty);
         }
 
         private void OnNewGame()
         {
-            throw new NotImplementedException();
+            RestartRequest?.Invoke(this, EventArgs.Empty);
         }
 
+        public void OnViewObjectsDeleted(object? sender, EventArgs e)
+        {
+            _model.DeleteObjects();
+        }
 
+        public void OnRestart()
+        {
+            _model.RestartRequest(this, EventArgs.Empty);
+        }
+
+        public void Save(string fileName)
+        {
+            if (fileName == null)
+                return;
+
+            try
+            {
+                IFilemanager fileman = new Persistence.TextFileManager();
+                _model.Save(fileName, fileman);
+            } 
+            catch (Exception e)
+            {
+                FileErrorOccured?.Invoke(this, "An Error occured.\n" + e.Message);
+            }
+        }
+
+        public void Load(string fileName)
+        {
+            if (fileName == null)
+                return;
+
+            try
+            {
+                DeleteViewRequest?.Invoke(this, EventArgs.Empty);
+                IFilemanager fileman = new Persistence.TextFileManager();
+                _model.Load(fileName, fileman);
+            }
+            catch (Exception e)
+            {
+                RestartRequest?.Invoke(this, EventArgs.Empty);
+                FileErrorOccured?.Invoke(this, "An Error occured.\n" + e.Message);
+            }
+        }
+
+        public event EventHandler<string>? FileErrorOccured;
     }
 }

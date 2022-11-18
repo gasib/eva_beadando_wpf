@@ -19,3 +19,8 @@ C:\Users\Beles\OneDrive - Eotvos Lorand Tudomanyegyetem\EVA\bead\wpf\eva_beadand
 C:\Users\Beles\OneDrive - Eotvos Lorand Tudomanyegyetem\EVA\bead\wpf\eva_beadando_wpf\SubmarineGame\SubmarineGameViewModel\obj\Debug\net6.0\SubmarineGameViewModel.pdb
 C:\Users\Beles\OneDrive - Eotvos Lorand Tudomanyegyetem\EVA\bead\wpf\eva_beadando_wpf\SubmarineGame\SubmarineGameViewModel\obj\Debug\net6.0\SubmarineGameViewModel.genruntimeconfig.cache
 C:\Users\Beles\OneDrive - Eotvos Lorand Tudomanyegyetem\EVA\bead\wpf\eva_beadando_wpf\SubmarineGame\SubmarineGameViewModel\obj\Debug\net6.0\ref\SubmarineGameViewModel.dll
+C:\Users\Beles\OneDrive - Eotvos Lorand Tudomanyegyetem\EVA\bead\wpf\eva_beadando_wpf\SubmarineGame\SubmarineGameViewModel\bin\Debug\net6.0\Persistence.deps.json
+C:\Users\Beles\OneDrive - Eotvos Lorand Tudomanyegyetem\EVA\bead\wpf\eva_beadando_wpf\SubmarineGame\SubmarineGameViewModel\bin\Debug\net6.0\Persistence.runtimeconfig.json
+C:\Users\Beles\OneDrive - Eotvos Lorand Tudomanyegyetem\EVA\bead\wpf\eva_beadando_wpf\SubmarineGame\SubmarineGameViewModel\bin\Debug\net6.0\Persistence.exe
+C:\Users\Beles\OneDrive - Eotvos Lorand Tudomanyegyetem\EVA\bead\wpf\eva_beadando_wpf\SubmarineGame\SubmarineGameViewModel\bin\Debug\net6.0\Persistence.dll
+C:\Users\Beles\OneDrive - Eotvos Lorand Tudomanyegyetem\EVA\bead\wpf\eva_beadando_wpf\SubmarineGame\SubmarineGameViewModel\bin\Debug\net6.0\Persistence.pdb
