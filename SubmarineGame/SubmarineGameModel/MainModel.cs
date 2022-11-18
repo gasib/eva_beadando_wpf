@@ -164,6 +164,7 @@ namespace SubmarineGameModel
             while (Mines.Count != 0)
             {
                 var mine = Mines.First();
+                mine.Updated -= OnMineModelUpdate;
                 Mines.Remove(mine);
             }
             ObjectsRemoved?.Invoke(this, EventArgs.Empty);

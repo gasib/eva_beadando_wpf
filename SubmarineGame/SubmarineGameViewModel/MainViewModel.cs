@@ -183,6 +183,7 @@ namespace SubmarineGameViewModel
 
         private void OnNewGame()
         {
+            _model.DeleteObjects();
             RestartRequest?.Invoke(this, EventArgs.Empty);
         }
 
